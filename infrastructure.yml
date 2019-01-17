@@ -1,0 +1,9 @@
+---
+- hosts: web_nodes
+  become: yes
+  tags: [web]
+  vars:
+    my_domain: 35.157.175.66
+    proxy_to: ec2-35-157-175-66.eu-central-1.compute.amazonaws.com
+  roles:
+    - nginx
