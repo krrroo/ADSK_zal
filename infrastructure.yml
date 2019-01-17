@@ -3,7 +3,15 @@
   become: yes
   tags: [web]
   vars:
-    my_domain: 35.157.175.66
-    proxy_to: ec2-35-157-175-66.eu-central-1.compute.amazonaws.com
+    my_domain: 3.120.235.188
+    proxy_to: ec2-3-120-235-188.eu-central-1.compute.amazonaws.com
   roles:
     - nginx
+  tasks:
+    - include_tasks: tasks/os_dependencies.yml
+    
+- hosts: stats_server
+  become: yes
+  roles:
+    - influxdb
+    - grafana
