@@ -1,18 +1,25 @@
 ---
-- name: "install influxdb"
+- name: "install yum package of influxdb from official"
   yum:
-    name: "{{influxdb_url}}"
-    
-- name: "start of influxdb service"
+    name: "{{rpm_influxdb}}"
+
+- name: "setup start of service influxdb after launch of machine"
   service:
     name: influxdb
     state: started
     enabled: yes
-    
+
 - name: "Wait 300 seconds for port 8086 to become open on the host, don't start checking for 10 seconds"
   wait_for:
     port: 8086
     delay: 10
 
 - name: "setup dabatase on influxdb"
-  shell: "curl -X POST 'http://localhost:8086/db?u={{ metrics_database_user }}&p={{ metrics_database_password }}' -d '{\"name\": \"{{ metrics_database_name }}\"}'"
+  shell: "curl -X POST 'http://localhost:8086/db?u={{ metrics_db_user }}&p={{ metrics_db_passw}}' -d '{\"name\": \"{{ metrics_db_name }}\"}'"
+
+
+- name: "service restart"
+  service:
+    name: influxdb
+    state: restarted
+    enabled: yes
