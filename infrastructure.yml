@@ -5,6 +5,8 @@
   vars:
     my_domain: 54.93.38.173
     proxy_to: ec2-54-93-38-173.eu-central-1.compute.amazonaws.com
+    web_node_private1: 172.31.23.10
+    web_node_private2: 172.31.20.53
   roles:
     - nginx
     - telegraf
