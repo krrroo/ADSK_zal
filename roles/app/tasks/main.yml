@@ -1,0 +1,27 @@
+---
+- name: "install jre"
+  yum:
+    name: java-1.8.0-openjdk
+    state: present
+- name: "create path"
+  file:
+    path: /opt/carrental
+    state: directory
+- name: "copy .jar to remote machine"
+  copy:
+    src: "{{jar_location}}"
+    dest: "{{car_rental_jar_remote}}"
+- name: "create user for service"
+  user:
+    name: "{{user}}"
+- name: "copy systemd config"
+  template:
+    src: /home/ec2-user/environment/201600/adsk-ansible-project/carrental/car_rental.service
+    dest: /etc/systemd/system/car_rental.service
+- name: "reload service"
+  systemd:
+    daemon_reload: yes
+- name: "start app"
+  service:
+    name: car_rental
+    state: restarted

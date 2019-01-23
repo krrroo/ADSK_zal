@@ -3,8 +3,8 @@
   become: yes
   tags: [web]
   vars:
-    my_domain: 3.122.232.252
-    proxy_to: ec2-3-122-232-252.eu-central-1.compute.amazonaws.com
+    my_domain: 54.93.38.173
+    proxy_to: ec2-54-93-38-173.eu-central-1.compute.amazonaws.com
   roles:
     - nginx
     - telegraf
@@ -18,12 +18,30 @@
     metrics_db_name: "metrics"
     metrics_db_pass: "metrics"
     metrics_db_user: "metrics"
-    datasource_name: "my-influx"
+    datasource_name: "datasource-influxdb"
     grafana_http_port: 3000
     telegraf_configuration: "telegraf_default.conf"
+    ip_adress: "3.122.245.108"
   roles:
     - influxdb
     - grafana
     - telegraf
   tasks:
     - include_tasks: tasks/grafana-config.yml
+    
+- hosts: app_nodes
+  become: yes
+  vars:
+    jar_location: /home/ec2-user/environment/201600/adsk-ansible-project/carrental/car_rental.jar
+    car_rental_jar_remote: /opt/carrental/car_rental.jar
+    user: car_rental
+    metrics_db_name: "metrics"
+    metrics_db_pass: "metrics"
+    metrics_db_user: "metrics"
+    datasource_name: "datasource-influxdb"
+    grafana_http_port: 3000
+    telegraf_configuration: "telegraf_default.conf"
+    ip_adress: "3.122.245.108"
+  roles:
+    - app
+    - telegraf

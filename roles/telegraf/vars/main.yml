@@ -6,4 +6,4 @@ telegraf_influx_database_user: "metrics"
 telegraf_influx_database_password: "metrics"
 telegraf_hostname: "{{ansible_hostname}}"
 telegraf_config_path: "telegraf_default.conf"
-metric_storage_ip: 172.31.24.244
+metric_storage_ip: 172.31.19.101

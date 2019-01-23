@@ -3,30 +3,40 @@
   tags: [grafana]
   grafana_datasource:
     name: "{{datasource_name}}"
-    grafana_url: "http://127.0.0.1:3000"
+    grafana_url: "http://{{ip_adress}}:3000"
     grafana_user: "admin"
     grafana_password: "admin"
     org_id: "1"
     ds_type: "influxdb"
-    url: "http://localhost:8086"
+    url: "http://{{ip_adress}}:3000"
     database: "{{metrics_db_name}}"
     password: "{{metrics_db_pass}}"
     user: "{{metrics_db_user}}"
 
-- template:
-    src: dashboard/apache.json
-    dest: /tmp/apache.json
-  tags: [grafana]
+- name: "Create directory"
+  file:
+    path: /var/lib/grafana/dashboards
+    state: directory
+    
+- name: "Copy json file"
+  copy:
+    src: dashboard/my.json
+    dest: /var/lib/grafana/dashboards/my.json
+#- template:
+ #   src: dashboard/my.json
+  #  dest: /tmp/my.json
+  #tags: [grafana]
+  
 
 - name: Import Grafana dashboard foo
   tags: [grafana, dashboard]
   grafana_dashboard:
-    grafana_url: "http://127.0.0.1:3000"
+    grafana_url: "http://{{ip_adress}}:3000"
     grafana_user: "admin"
     grafana_password: "admin"
     state: present
-    slug: apache
+    uid: mydashboard
     message: Updated by ansible
     overwrite: yes
-    path: /tmp/apache.json
+    path: /var/lib/grafana/dashboards/my.json
   ignore_errors: yes
