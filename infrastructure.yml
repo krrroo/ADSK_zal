@@ -9,7 +9,6 @@
     web_node_private2: 172.31.25.236
   roles:
     - nginx
-    - telegraf
   tasks:
     - include_tasks: tasks/os_dependencies.yml
     
