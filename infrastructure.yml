@@ -3,10 +3,10 @@
   become: yes
   tags: [web]
   vars:
-    my_domain: 54.93.38.173
+    my_domain: 3.122.248.243
     proxy_to: ec2-54-93-38-173.eu-central-1.compute.amazonaws.com
-    web_node_private1: 172.31.23.10
-    web_node_private2: 172.31.20.53
+    web_node_private1: 172.31.16.26
+    web_node_private2: 172.31.25.236
   roles:
     - nginx
     - telegraf
@@ -21,9 +21,9 @@
     metrics_db_pass: "metrics"
     metrics_db_user: "metrics"
     datasource_name: "datasource-influxdb"
-    grafana_http_port: 3000
+    #grafana_http_port: 3000
     telegraf_configuration: "telegraf_default.conf"
-    ip_adress: "3.122.245.108"
+    ip_adress: "172.31.18.156"
   roles:
     - influxdb
     - grafana
@@ -41,9 +41,9 @@
     metrics_db_pass: "metrics"
     metrics_db_user: "metrics"
     datasource_name: "datasource-influxdb"
-    grafana_http_port: 3000
+    #grafana_http_port: 3000
     telegraf_configuration: "telegraf_default.conf"
-    ip_adress: "3.122.245.108"
+    ip_adress: "172.31.18.156"
   roles:
     - app
     - telegraf

@@ -8,7 +8,7 @@
     grafana_password: "admin"
     org_id: "1"
     ds_type: "influxdb"
-    url: "http://{{ip_adress}}:3000"
+    url: "http://{{ip_adress}}:8086"
     database: "{{metrics_db_name}}"
     password: "{{metrics_db_pass}}"
     user: "{{metrics_db_user}}"
